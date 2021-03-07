@@ -1,3 +1,16 @@
+/*
+* Copyright 2021 tomGER, git@tomger.eu
+*
+* Licensed under the EUPL, Version 1.2 or – as soon they will be approved by the European Commission - subsequent versions of the EUPL (the "Licence");
+* You may not use this work except in compliance with theLicence.
+*
+* You may obtain a copy of the Licence at: https://joinup.ec.europa.eu/software/page/eupl
+*
+* Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the Licence for the specific language governing permissions and limitations under the Licence.
+*/
+
 #![no_std]
 #![no_main]
 
@@ -23,21 +36,35 @@ pub fn initialize_heap(_hbl_heap: util::PointerAndSize) -> util::PointerAndSize 
     }
 }
 
+pub fn exists_folder(path: &str) -> bool {
+    match fs::get_entry_type(String::from(path)) {
+        Ok(i) => match i { 
+            fs::DirectoryEntryType::File => false,
+            fs::DirectoryEntryType::Directory => true
+        }
+        Err(_) => false
+    }
+}
+
 #[no_mangle]
 pub fn main() -> Result<()> {
     fs::initialize()?;
     fs::mount_sd_card("sdmc")?;
 
-    // Old Tesla
-    fs::delete_directory(String::from("sdmc:/atmosphere/contents/010000000007E51A/flags"))?;
-    fs::delete_directory(String::from("sdmc:/atmosphere/contents/010000000007E51A"))?;
+    let delete_folders = [
+    "sdmc:/atmosphere/contents/010000000007E51A/flags",
+    "sdmc:/atmosphere/contents/010000000007E51A",
+    "sdmc:/atmosphere/exefs_patches/nichole_logo",
+    "sdmc:/atmosphere/contents/010000000000DA7A/flags",
+    "sdmc:/atmosphere/contents/010000000000DA7A",
+    "sdmc:/rustisbad"
+    ];
 
-    // Delete Nichole
-    fs::delete_directory(String::from("sdmc:/atmosphere/exefs_patches/nichole_logo"))?;
-
-    // Delete itself
-    fs::delete_directory(String::from("sdmc:/atmosphere/contents/010000000000DA7A/flags"))?;
-    fs::delete_directory(String::from("sdmc:/atmosphere/contents/010000000000DA7A"))?;
+    for i in 0..delete_folders.len() {
+        if exists_folder(delete_folders[i]) {
+            fs::delete_directory(String::from(delete_folders[i]))?;
+        }
+    }
 
     fs::finalize();
     Ok(())
