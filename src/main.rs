@@ -8,8 +8,6 @@ use nx::{
     fs
 };
 
-use core::panic;
-
 #[allow(non_upper_case_globals)]
 const KiB: usize = 0x400;
 
@@ -31,6 +29,6 @@ pub fn main() -> Result<()> {
 }
 
 #[panic_handler]
-fn panic_handler(info: &panic::PanicInfo) -> ! {
+fn panic_handler(info: &core::panic::PanicInfo) -> ! {
     util::simple_panic_handler::<log::LmLogger>(info, assert::AssertMode::FatalThrow)
 }
