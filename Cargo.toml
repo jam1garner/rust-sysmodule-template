@@ -1,0 +1,13 @@
+[package]
+name = "libra_cleaner"
+version = "0.1.0"
+authors = ["tomGER <github@tomger.eu>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+nx = { git = "https://github.com/aarch64-switch-rs/nx" }
+
+[package.metadata.sprinkle.nsp]
+npdm = "npdm.json"
