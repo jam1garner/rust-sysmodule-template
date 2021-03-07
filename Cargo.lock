@@ -45,13 +45,21 @@ source = "git+https://github.com/aarch64-switch-rs/logpacket#eb8b99fcb822f396f6f
 [[package]]
 name = "nx"
 version = "0.1.0"
-source = "git+https://github.com/aarch64-switch-rs/nx#6ef3003ab2748d1f8621753f93e41986aa13f9e5"
 dependencies = [
  "arrayvec",
  "derivative",
  "linked_list_allocator",
  "logpacket",
+ "nx-macros",
  "paste",
+]
+
+[[package]]
+name = "nx-macros"
+version = "0.1.0"
+dependencies = [
+ "quote",
+ "syn",
 ]
 
 [[package]]
