@@ -26,7 +26,7 @@ use nx::fs;
 
 use core::panic;
 
-// We're using 8MB of heap
+// We're using 16KB of heap
 static mut STACK_HEAP: [u8; 0x00004000] = [0; 0x00004000];
 
 #[no_mangle]
