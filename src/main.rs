@@ -1,24 +1,14 @@
 #![no_std]
 #![no_main]
 
-#[macro_use]
 extern crate alloc;
-use alloc::vec::Vec;
 use alloc::string::String;
 
-#[macro_use]
 extern crate nx;
-use nx::svc;
 use nx::result::*;
-use nx::results;
 use nx::util;
 use nx::diag::assert;
 use nx::diag::log;
-use nx::service::vi;
-use nx::service::nv;
-use nx::gpu;
-use nx::service::hid;
-use nx::input;
 use nx::fs;
 
 use core::panic;
