@@ -20,13 +20,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "libra_cleaner"
-version = "0.1.0"
-dependencies = [
- "nx",
-]
-
-[[package]]
 name = "linked_list_allocator"
 version = "0.8.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -74,6 +67,13 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1e0704ee1a7e00d7bb417d0770ea303c1bccbabf0ef1667dae92b5967f5f8a71"
 dependencies = [
  "unicode-xid",
+]
+
+[[package]]
+name = "project_name"
+version = "0.1.0"
+dependencies = [
+ "nx",
 ]
 
 [[package]]
