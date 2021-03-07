@@ -25,17 +25,21 @@ pub fn initialize_heap(_hbl_heap: util::PointerAndSize) -> util::PointerAndSize 
 
 #[no_mangle]
 pub fn main() -> Result<()> {
+    fs::initialize()?;
+    fs::mount_sd_card("sdmc")?;
+
     // Old Tesla
-    fs::delete_directory(String::from("sdmc:/atmosphere/contents/010000000007E51A/flags"));
-    fs::delete_directory(String::from("sdmc:/atmosphere/contents/010000000007E51A"));
+    fs::delete_directory(String::from("sdmc:/atmosphere/contents/010000000007E51A/flags"))?;
+    fs::delete_directory(String::from("sdmc:/atmosphere/contents/010000000007E51A"))?;
 
     // Delete Nichole
-    fs::delete_directory(String::from("sdmc:/atmosphere/exefs_patches/nichole_logo"));
+    fs::delete_directory(String::from("sdmc:/atmosphere/exefs_patches/nichole_logo"))?;
 
     // Delete itself
-    fs::delete_directory(String::from("sdmc:/atmosphere/contents/010000000000DA7A/flags"));
-    fs::delete_directory(String::from("sdmc:/atmosphere/contents/010000000000DA7A"));
+    fs::delete_directory(String::from("sdmc:/atmosphere/contents/010000000000DA7A/flags"))?;
+    fs::delete_directory(String::from("sdmc:/atmosphere/contents/010000000000DA7A"))?;
 
+    fs::finalize();
     Ok(())
 }
 
